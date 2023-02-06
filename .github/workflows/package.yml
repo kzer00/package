@@ -83,7 +83,7 @@ jobs:
         if: env.LATEST_VERSION == 0
         uses: NBTX/upload-release-assets@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KZERO_TOKEN: ${{ secrets.KZERO_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           targets: artifacts/*
