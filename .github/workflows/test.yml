@@ -67,7 +67,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          KZERO_TOKEN: ${{ secrets.KZERO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.KZERO_TOKEN }}
         with:
           tag_name: v${{ env.KERNEL_VERSION }}-${{ env.OPENWRT_REL }}-${{ env.DEVICE_NAME }}
           release_name: Release v${{ env.KERNEL_VERSION }}-${{ env.OPENWRT_REL }}-${{ env.DEVICE_NAME }}
@@ -77,7 +77,7 @@ jobs:
         if: env.LATEST_VERSION == 0
         uses: NBTX/upload-release-assets@v1
         env:
-          KZERO_TOKEN: ${{ secrets.KZERO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.KZERO_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           targets: artifacts/*
