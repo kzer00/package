@@ -54,17 +54,17 @@ jobs:
         shell: bash {0}
         run: |
           mkdir artifacts
-          for file in bin/packages/aarch64_generic/*; do
+          for file in bin/*; do
             sudo mv $file artifacts/
           done
           cd artifacts
           sudo tar -czf packages.tar.gz packages/
-          sudo tar -czf base.tar.gz base/
-          sudo tar -czf luci.tar.gz luci/
-          sudo tar -czf routing.tar.gz routing/
-          sudo tar -czf telephony.tar.gz telephony/
+          sudo tar -czf targets.tar.gz targets/
+          #sudo tar -czf luci.tar.gz luci/
+          #sudo tar -czf routing.tar.gz routing/
+          #sudo tar -czf telephony.tar.gz telephony/
     
-          sudo rm -rf packages telephony base luci routing/
+          sudo rm -rf packages targets/
       - name: Create release
         if: env.LATEST_VERSION == 0
         id: create_release
@@ -74,7 +74,7 @@ jobs:
         with:
           tag_name: v${{ env.KERNEL_VERSION }}-${{ env.OPENWRT_REL }}-${{ env.DEVICE_NAME }}
           release_name: Release v${{ env.KERNEL_VERSION }}-${{ env.OPENWRT_REL }}-${{ env.DEVICE_NAME }}
-          draft: false
+          draft: true
           prerelease: false
       - name: Upload release assets
         if: env.LATEST_VERSION == 0
