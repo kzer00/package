@@ -54,13 +54,17 @@ jobs:
         shell: bash {0}
         run: |
           mkdir artifacts
-          for file in bin/packages/aarch64_generic/*/*; do
+          for file in bin/packages/aarch64_generic/*; do
             sudo mv $file artifacts/
           done
           cd artifacts
           sudo tar -czf packages.tar.gz packages/
+          sudo tar -czf base.tar.gz base/
+          sudo tar -czf luci.tar.gz luci/
+          sudo tar -czf routing.tar.gz routing/
+          sudo tar -czf telephony.tar.gz telephony/
     
-          sudo rm -rf packages /
+          sudo rm -rf packages telephony base luci routing/
       - name: Create release
         if: env.LATEST_VERSION == 0
         id: create_release
