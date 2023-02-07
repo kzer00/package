@@ -59,9 +59,8 @@ jobs:
           done
           cd artifacts
           sudo tar -czf packages.tar.gz packages/
-          sudo tar -czf base.tar.gz base/
-          sudo tar -czf luci.tar.gz luci/
-          #sudo rm -rf packages luci base/
+    
+          sudo rm -rf packages /
       - name: Create release
         if: env.LATEST_VERSION == 0
         id: create_release
